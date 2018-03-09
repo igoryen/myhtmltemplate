@@ -6,6 +6,11 @@ var sassdoc = require('sassdoc');
 var cleanCSS = require('gulp-clean-css');
 var concat = require('gulp-concat');
 
+var uglify = require('gulp-uglify');
+var gulpIf = require('gulp-if');
+
+var strip = require('gulp-strip-comments');
+
 gulp.task('default', defaultTask);
 
 function defaultTask(done) {  
@@ -18,6 +23,12 @@ var input = [
   'css/styles2.scss'  
 ];
 var output = 'css/compiled/';
+
+var inputjs = [
+  'js/scripts.js'
+  // 'js/scripts2.js'  
+];
+var outputjs = 'js/compiled/';
 
 var sassOptions = {
     errLogToConsole: true,
@@ -72,6 +83,17 @@ gulp.task('sassdoc', function () {
     .resume(); // 11
 });
 
+gulp.task('scripts', function(){
+  return gulp.src(inputjs)
+    .pipe(sourcemaps.init())
+    // .pipe(useref())
+    .pipe(strip()) // uglify strips comments too but also uglifies
+    // Minifies only if it's a JavaScript file
+    // .pipe(gulpIf('*.js', uglify())) // works but deactivated
+    .pipe(sourcemaps.write('.'))
+    .pipe(gulp.dest(outputjs))
+});
+
 //14
 gulp.task('watch', function() {
     return gulp    
@@ -83,7 +105,7 @@ gulp.task('watch', function() {
 
 gulp.task('watch', function() {
     gulp.watch(input, gulp.series('sass')); // 19
-  // gulp.watch('app/js/*.js', gulp.series('scripts'));
+    gulp.watch(inputjs, gulp.series('scripts'));
   // gulp.watch('app/img/*', gulp.series('images'));
 });
 
