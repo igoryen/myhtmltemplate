@@ -12,7 +12,11 @@ function defaultTask(done) {
   done(); // 5
 }
 
-var input = ['css/debug.scss', 'css/styles1.scss', 'css/styles2.scss'  ] ;
+var input = [
+  'css/debug.scss', 
+  'css/styles1.scss', 
+  'css/styles2.scss'  
+];
 var output = 'css/compiled/';
 
 var sassOptions = {
@@ -21,7 +25,11 @@ var sassOptions = {
 }; // 4
 
 var autoprefixerOptions = {
-  browsers: ['last 2 versions', '> 5%', 'Firefox ESR']
+  browsers: [
+    'last 2 versions', 
+    '> 5%', 
+    'Firefox ESR'
+  ]
 };
 
 var sassdocOptions = {
