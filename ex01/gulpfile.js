@@ -3,6 +3,8 @@ var sass = require('gulp-sass');
 var sourcemaps = require('gulp-sourcemaps');
 var autoprefixer = require('gulp-autoprefixer');
 var sassdoc = require('sassdoc');
+var cleanCSS = require('gulp-clean-css');
+var concat = require('gulp-concat');
 
 gulp.task('default', defaultTask);
 
@@ -10,7 +12,7 @@ function defaultTask(done) {
   done(); // 5
 }
 
-var input = 'css/*.scss';
+var input = ['css/debug.scss', 'css/styles.scss' ] ;
 var output = 'css/compiled/';
 
 var sassOptions = {
@@ -40,10 +42,16 @@ gulp.task('sass', function () {
     // .pipe(autoprefixer()) // 8
     .pipe(autoprefixer(autoprefixerOptions)) // 9
 
+    .pipe(concat('all.css'))
+
+
+    .pipe(cleanCSS())
     // .pipe(sourcemaps.write()) // 6
+
     .pipe(sourcemaps.write('.')) // 7
     
-    .pipe(gulp.dest(output)); // 3
+    .pipe(gulp.dest(output)) // 3
+
     
 });
 
