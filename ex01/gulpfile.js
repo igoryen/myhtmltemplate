@@ -11,7 +11,7 @@ function defaultTask(done) {
 }
 
 var input = 'css/*.scss';
-var output = 'css/';
+var output = 'css/compiled/';
 
 var sassOptions = {
     errLogToConsole: true,
