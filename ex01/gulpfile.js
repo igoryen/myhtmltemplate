@@ -12,7 +12,7 @@ function defaultTask(done) {
   done(); // 5
 }
 
-var input = ['css/debug.scss', 'css/styles.scss' ] ;
+var input = ['css/debug.scss', 'css/styles1.scss', 'css/styles2.scss'  ] ;
 var output = 'css/compiled/';
 
 var sassOptions = {
