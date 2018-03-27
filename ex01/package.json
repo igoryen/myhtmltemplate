@@ -17,6 +17,10 @@
     "gulp-sourcemaps": "^2.6.3",
     "gulp-strip-comments": "^2.5.2",
     "gulp-uglify": "^3.0.0",
+    "gulp-util": "^3.0.8",
     "sassdoc": "^2.5.0"
+  },
+  "dependencies": {
+    "gulp-if": "^2.0.2"
   }
 }
