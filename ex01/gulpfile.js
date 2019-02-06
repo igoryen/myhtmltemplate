@@ -18,7 +18,9 @@ function defaultTask(done) {
 }
 
 var input = [
-  'css/debug.scss', 
+  // 'css/debug-desktop-first.scss', 
+  'css/debug-mobile-first.scss', 
+  'css/globals.scss',
   'css/styles1.scss', 
   'css/styles2.scss'  
 ];
@@ -88,6 +90,7 @@ gulp.task('scripts', function(){
     .pipe(sourcemaps.init())
     // .pipe(useref())
     .pipe(strip()) // uglify strips comments too but also uglifies
+    .pipe(concat('all.js')) // concatenates all JS files into one
     // Minifies only if it's a JavaScript file
     // .pipe(gulpIf('*.js', uglify())) // works but deactivated
     .pipe(sourcemaps.write('.'))
