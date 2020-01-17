@@ -18,12 +18,9 @@ function defaultTask(done) {
 }
 
 var input = [
-  // 'css/debug-desktop-first.scss', 
-  'css/debug-mobile-first.scss', 
-  'css/globals.scss',
-  'css/styles1.scss', 
-  'css/styles2.scss'  
+  'css/raw/main.scss'
 ];
+
 var output = 'css/compiled/';
 
 var inputjs = [
@@ -60,39 +57,24 @@ var sassdocOptions = {
 
 gulp.task('sass', function () {
     return gulp    
-    .src(input) // 1    
-
-    .pipe(sourcemaps.init()) // 
-    
-    // .pipe(sass()) // 2
-    .pipe(sass(sassOptions).on('error', sass.logError)) // 4
-    
-    
-    
-    // .pipe(autoprefixer()) // 8
+    .src(input) // 1
+    .pipe(sourcemaps.init()) //
+    .pipe(sass(sassOptions).on('error', sass.logError)) // 6
     .pipe(autoprefixer(autoprefixerOptions)) // 9
-
-    .pipe(concat('all.css'))
-
-
-    .pipe(cleanCSS())
-    // .pipe(sourcemaps.write()) // 6
-
+    .pipe(concat('all.css')) // 8
+    // .pipe(cleanCSS()) // 10
     .pipe(sourcemaps.write('.')) // 7
-    
-    .pipe(gulp.dest(output)) // 3
-
-    
+    .pipe(gulp.dest(output)) // 3    
 });
 
 // 12
 gulp.task('sassdoc', function () {
     return gulp
-    .src(input)
-    // .pipe(sassdoc()) // 10
-    .pipe(sassdoc(sassdocOptions)) // 13
-    .resume(); // 11
+        .src(input)
+        .pipe(sassdoc(sassdocOptions)) // 13
+        .resume(); // 11
 });
+
 
 gulp.task('scripts', function(){
   return gulp.src(inputjs)
@@ -111,7 +93,7 @@ gulp.task('watch', function() {
     return gulp    
     .watch(input, ['sass']) // 15   
     .on('change', function(event) { // 16
-      console.log('File ' + event.path + ' was ' + event.type + ', running tasks...');
+        console.log('File ' + event.path + ' was ' + event.type + ', running tasks...');
     });
 });
 
@@ -121,6 +103,19 @@ gulp.task('watch', function() {
   // gulp.watch('app/img/*', gulp.series('images'));
 });
 
+gulp.task('build', async function() {
+    gulp.src( input )
+        .pipe(sourcemaps.init()) //
+        .pipe(sass(sassOptions).on('error', sass.logError)) // 6
+        .pipe(autoprefixer(autoprefixerOptions)) // 9
+        .pipe(concat('all.css')) // 8
+        // .pipe(cleanCSS()) // 10
+        .pipe(sourcemaps.write('.')) // 7
+        .pipe(gulp.dest( output ))
+        .on('end', function(){ log('All *.scss files have been compiled into the single all.css with vendor prefixes...'); });
+});
+
+// 21
 
 // gulp.task('default', ['sass', 'watch' /*, possible other tasks... */]); // 17
 

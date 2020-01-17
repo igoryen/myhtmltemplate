@@ -1,4 +1,4 @@
-@import '_variables';
+
 //=========================================
 //      USAGE
 //=========================================    
@@ -22,14 +22,11 @@
 //      GLOBAL STYLES
 //=========================================
 
-    *, *:before, *:after { box-sizing: border-box; }
-
     body {
-        display: flex;
-        justify-content: flex-end;
+        background-color: $mercury;
     }
 
-    .anthony {
+    .barbara {
         color: green;
         font-size: 1em;
         background-color: yellow;

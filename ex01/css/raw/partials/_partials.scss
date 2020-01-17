@@ -1,0 +1,104 @@
+@import '_variables';
+
+
+
+
+@mixin cta_button( $type ) {
+    // 0 = remove
+    // 1 = add
+    // 2 = edit
+
+    $bkg_clr_usual: #ffffff;
+    $bkg_clr_hover: #ffffff;
+
+    @if $type == remove {
+        $bkg_clr_usual: #ff9999;
+        $bkg_clr_hover: #b32400;
+    }
+    @else if $type == add {
+        $bkg_clr_usual: #47d147;
+        $bkg_clr_hover: #009900;
+    }
+    @else if $type == edit {
+        $bkg_clr_usual: $blue_light;
+        $bkg_clr_hover: $blue_dark;
+    }
+
+
+
+    display: flex;
+    justify-content: center;
+    width: 20px;
+    height: 20px;
+    //font-size: 13px;
+    align-items: center;
+    color: #fff;
+    background-color: $bkg_clr_usual;
+    border-radius: 3px;
+    cursor: pointer;
+    transition: .3s;
+    //padding-top: 1px;
+    &:hover {
+        background-color: $bkg_clr_hover;
+    }
+}
+
+@mixin table_styled( $lined ) { // lined = with lines
+    td, th {
+        border-collapse: collapse;
+        //border: 1px solid #bfbfbf;
+    }
+    th {
+        color: rgba(0, 0, 0, 0.5);
+
+    }
+    tbody {
+        tr {
+            &:nth-child(even) {
+                background-color: $grey_lighter;
+            }
+        }
+    }
+    @if $lined {
+        thead, tbody, tfoot {
+            th, td {
+                &:not(:last-child) {
+                    border-right: 1px solid $grey_light;
+                }
+            }
+        }
+        thead {
+            th {
+                border-bottom: 1px solid $grey_light;
+            }
+        }
+        tbody {
+            td {
+                border-bottom: 1px solid $grey_light;
+            }
+        }
+        tfoot {
+            tr {
+                &:not(:last-child) {
+                    td {
+                        border-bottom: 1px solid $grey_light;
+                    }
+                }
+            }
+        }
+    }
+}
+
+@mixin legend_aligned {
+    display: flex;
+    flex-direction: row;
+    span {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+
+        i {
+            margin-left: 0.5em;
+        }
+    }
+}
